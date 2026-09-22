@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<title>뭉클회 회비 장부</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="뭉클회 회비 장부">
+<meta property="og:description" content="2024~2026년 회비와 모임 지출 정리">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317181A'/%3E%3Crect x='8' y='9' width='16' height='2.5' rx='1.25' fill='%23F5F5F2'/%3E%3Crect x='8' y='15' width='16' height='2.5' rx='1.25' fill='%2300804F'/%3E%3Crect x='8' y='21' width='10' height='2.5' rx='1.25' fill='%23BE3A24'/%3E%3C/svg%3E">
+<style>
+  :root{
+    color-scheme: light dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html, body{margin:0;}
+  img{max-width:100%;}
+  [hidden]{display:none !important;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#F5F5F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
+    --line:#E3E3DC; --line-strong:#CBCBC1;
+    --ink:#17181A; --ink-2:#4E5155; --muted:#86898E;
+    --expense:#BE3A24; --income:#00804F;
+    --expense-soft:rgba(190,58,36,.16); --income-soft:rgba(0,128,79,.13);
+    --gold-ink:#8A6410; --gold-bg:#F3EAD6; --gold-line:#E3D3AE;
+    --shadow:0 1px 2px rgba(20,22,24,.05), 0 10px 26px -14px rgba(20,22,24,.18);
+    --serif:"Gowun Batang", "Nanum Myeongjo", "Apple SD Gothic Neo", serif;
+    --sans:"IBM Plex Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#121311; --surface:#1A1B19; --surface-2:#1F201D;
+      --line:#2C2E2A; --line-strong:#3E413B;
+      --ink:#ECEDE8; --ink-2:#A8ABA4; --muted:#7C807A;
+      --expense:#E4654A; --income:#2E9E85;
+      --expense-soft:rgba(228,101,74,.20); --income-soft:rgba(46,158,133,.18);
+      --gold-ink:#D9AB4F; --gold-bg:#2E2718; --gold-line:#453A22;
+      --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121311; --surface:#1A1B19; --surface-2:#1F201D;
+    --line:#2C2E2A; --line-strong:#3E413B;
+    --ink:#ECEDE8; --ink-2:#A8ABA4; --muted:#7C807A;
+    --expense:#E4654A; --income:#2E9E85;
+    --expense-soft:rgba(228,101,74,.20); --income-soft:rgba(46,158,133,.18);
+    --gold-ink:#D9AB4F; --gold-bg:#2E2718; --gold-line:#453A22;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:1000px; margin:0 auto; padding-inline:20px; padding-block:40px 64px;}
+  .num{font-family:var(--mono); font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
+
+  /* ---------- header ---------- */
+  .eyebrow{
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--serif); font-weight:700; font-size:clamp(34px,7vw,52px);
+    line-height:1.14; margin:0; text-wrap:balance; letter-spacing:-.01em;
+  }
+  .lede{color:var(--ink-2); margin:12px 0 0; max-width:60ch;}
+
+  .hero{
+    margin-top:32px; padding-top:26px; border-top:2px solid var(--ink);
+    display:flex; flex-wrap:wrap; align-items:flex-end; gap:12px 28px;
+  }
+  .hero-label{font-size:12px; letter-spacing:.14em; color:var(--muted); font-weight:600;}
+  .hero-value{
+    font-family:var(--mono); font-weight:500; font-size:clamp(38px,9vw,64px);
+    line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums;
+  }
+  .hero-note{color:var(--ink-2); font-size:13px; padding-bottom:6px;}
+
+  /* ---------- tiles ---------- */
+  .tiles{
+    margin-top:38px; display:grid; gap:1px; background:var(--line);
+    grid-template-columns:repeat(auto-fit,minmax(196px,1fr));
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  .tile{background:var(--surface); padding:20px 18px;}
+  .tile dt{font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.04em;}
+  .tile dd{
+    margin:8px 0 0; font-family:var(--mono); font-size:22px; font-weight:500;
+    font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+  }
+  .tile .sub{display:block; font-family:var(--sans); font-size:12px; color:var(--ink-2); margin-top:6px; letter-spacing:0;}
+
+  /* ---------- section chrome ---------- */
+  section{margin-top:56px;}
+  h2{
+    font-family:var(--serif); font-size:24px; font-weight:700; margin:0;
+    letter-spacing:-.01em;
+  }
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .sec-note{font-size:12.5px; color:var(--muted);}
+
+  /* ---------- year compare chart ---------- */
+  .chart{
+    margin-top:20px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:24px 20px 18px; box-shadow:var(--shadow);
+  }
+  .legend{display:flex; gap:18px; margin-bottom:22px; font-size:12.5px; color:var(--ink-2);}
+  .legend span{display:inline-flex; align-items:center; gap:7px;}
+  .swatch{width:11px; height:11px; border-radius:3px; display:inline-block;}
+  .grp{margin-bottom:22px;}
+  .grp:last-child{margin-bottom:6px;}
+  .grp-title{
+    font-family:var(--mono); font-size:13px; color:var(--ink-2); font-weight:500;
+    margin-bottom:9px; display:flex; align-items:baseline; gap:9px;
+  }
+  .grp-title em{font-style:normal; font-family:var(--sans); font-size:11.5px; color:var(--muted);}
+  .row{display:grid; grid-template-columns:46px 1fr 104px; align-items:center; gap:10px; margin-bottom:2px;}
+  .row-key{font-size:12px; color:var(--muted);}
+  .track{display:block; height:15px; background:var(--surface-2); border-radius:4px; overflow:hidden;}
+  .fill{display:block; height:100%; min-width:3px; border-radius:4px; transition:filter .15s;}
+  .row:hover .fill{filter:brightness(1.08)}
+  .row-val{
+    font-family:var(--mono); font-size:13px; text-align:right; color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .axis-note{font-size:11.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:12px; margin-top:16px;}
+
+  /* ---------- year block ---------- */
+  .year{
+    margin-top:40px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .year-head{
+    padding:22px 20px; border-bottom:1px solid var(--line); background:var(--surface-2);
+    display:flex; flex-wrap:wrap; align-items:center; gap:18px 26px;
+  }
+  .year-num{
+    font-family:var(--serif); font-size:40px; font-weight:700; line-height:.95;
+    letter-spacing:-.02em; margin-right:4px;
+  }
+  .year-num small{display:block; font-family:var(--sans); font-size:11px; font-weight:500; color:var(--muted); letter-spacing:.06em; margin-top:6px;}
+  .flow{display:flex; flex-wrap:wrap; gap:14px 22px; align-items:center;}
+  .flow-item{min-width:96px;}
+  .flow-item dt{font-size:11px; color:var(--muted); font-weight:600; letter-spacing:.04em;}
+  .flow-item dd{margin:3px 0 0; font-family:var(--mono); font-size:16px; font-variant-numeric:tabular-nums;}
+  .flow-op{color:var(--line-strong); font-size:18px; font-family:var(--mono);}
+
+  .sub-head{
+    padding:16px 20px 6px; font-size:11.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted); font-weight:600;
+  }
+
+  .table-wrap{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; min-width:520px;}
+  th{
+    font-size:11px; letter-spacing:.08em; color:var(--muted); font-weight:600;
+    text-align:left; padding:8px 20px; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  th.r, td.r{text-align:right;}
+  td{padding:11px 20px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--surface-2);}
+  td.when{font-family:var(--mono); font-size:13px; color:var(--ink-2); white-space:nowrap; width:66px;}
+  td.what{min-width:200px;}
+  .what-name{display:block;}
+  .bar{
+    display:block; height:3px; border-radius:2px; background:var(--expense);
+    margin-top:7px; opacity:.85; max-width:100%;
+  }
+  td.amt{font-family:var(--mono); font-size:14px; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--expense); font-weight:500;}
+  td.bal{font-family:var(--mono); font-size:14px; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink-2);}
+  td.amt.zero{color:var(--muted); font-weight:400;}
+  .chip{
+    display:inline-block; font-size:11px; font-weight:600; letter-spacing:.02em;
+    padding:2px 7px; border-radius:4px; margin-left:7px; vertical-align:1px;
+    background:var(--gold-bg); color:var(--gold-ink); border:1px solid var(--gold-line);
+  }
+  tfoot td{
+    border-top:2px solid var(--line-strong); border-bottom:none; padding-top:13px; padding-bottom:16px;
+    font-weight:600;
+  }
+  tfoot .lbl{font-size:12px; letter-spacing:.06em; color:var(--muted);}
+
+  /* ---------- members ---------- */
+  .members{
+    display:grid; gap:1px; background:var(--line);
+    grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+    border-top:1px solid var(--line);
+  }
+  .member{
+    background:var(--surface); padding:11px 20px; display:flex;
+    align-items:baseline; justify-content:space-between; gap:10px;
+  }
+  .member .who{font-weight:500;}
+  .member .who small{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-left:7px; font-weight:400;}
+  .member .paid{font-family:var(--mono); font-size:13px; color:var(--income); font-variant-numeric:tabular-nums;}
+  .member-foot{
+    background:var(--surface-2); padding:12px 20px; display:flex; justify-content:space-between;
+    gap:10px; font-size:13px; grid-column:1/-1;
+  }
+  .member-foot b{font-family:var(--mono); font-weight:500; font-variant-numeric:tabular-nums;}
+
+  footer{
+    margin-top:56px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:12.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 20px;
+  }
+  footer a{color:var(--ink-2);}
+  a:focus-visible, [tabindex]:focus-visible{outline:2px solid var(--expense); outline-offset:2px; border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+  @media (max-width:520px){
+    .page{padding-block:28px 48px;}
+    .row{grid-template-columns:40px 1fr 88px; gap:8px;}
+    .row-val{font-size:12px;}
+    th, td, .member, .member-foot, .sub-head{padding-left:16px; padding-right:16px;}
+    .year-head{padding:18px 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">뭉클회 · 회비 장부</p>
+    <h1>뭉클회 회비 장부</h1>
+    <p class="lede">2024년 4월부터 2026년 9월까지, 회비로 들어온 돈과 모임에서 쓴 돈을 한 장에 정리했습니다. 금액은 모두 원본 구글시트 그대로이고, 잔액은 한 줄씩 다시 계산해 맞춰봤습니다.</p>
+    <div class="hero">
+      <div>
+        <div class="hero-label">현재 잔액</div>
+        <div class="hero-value" id="heroVal">₩2,290,900</div>
+      </div>
+      <div class="hero-note">2026년 9월 남문장례식장 협찬 + 맥주값까지 반영</div>
+    </div>
+  </header>
+
+  <dl class="tiles" id="tiles"></dl>
+
+  <section>
+    <div class="sec-head">
+      <h2>연도별 회비와 지출</h2>
+      <span class="sec-note">2026년은 1~9월까지의 기록입니다</span>
+    </div>
+    <div class="chart">
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--income)"></i>회비 수입</span>
+        <span><i class="swatch" style="background:var(--expense)"></i>지출</span>
+      </div>
+      <div id="yearChart"></div>
+      <p class="axis-note">막대 길이는 가장 큰 값인 2026년 회비 ₩3,300,000을 가득 찬 길이로 보고 그렸습니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>연도별 상세</h2>
+      <span class="sec-note">최근 연도부터</span>
+    </div>
+    <div id="years"></div>
+  </section>
+
+  <footer>
+    <span>정리 기준일 2026년 9월 22일</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var W = function(n){ return "₩" + n.toLocaleString("ko-KR"); };
+
+  var YEARS = [
+    {
+      year:2026, partial:true, carry:676200, dues:3300000, avail:3976200, spent:1685300, end:2290900,
+      endLabel:"현재 잔액",
+      rows:[
+        ["26.01","이연규 유달전통 맷돌면옥",372000,3604200,null],
+        ["26.01","오릭커피",82200,3522000,null],
+        ["26.02","영식이 한우암소곱창",335000,3187000,null],
+        ["26.03","은영식당 (16일)",212000,2975000,null],
+        ["26.04","20일 모임 · 달구 협찬",0,2975000,"협찬"],
+        ["26.05","종착역",345100,2629900,null],
+        ["26.06","천지장례식장",0,2629900,"협찬"],
+        ["26.07","팁스 · 청소소독업체 협찬",0,2629900,"협찬"],
+        ["26.08","산골",244000,2385900,null],
+        ["26.09","남문장례식장 협찬 + 맥주값",95000,2290900,null]
+      ],
+      members:[
+        ["배양수","02.23",300000],["조영준","02.23",300000],["장창수","01.19",300000],
+        ["구귀명","01.22",300000],["차평석","01.09",300000],["이정신","01.20",300000],
+        ["김호진","—",300000],["서일환","01.09",300000],["김경무","01.09",300000],
+        ["문덕청","02.23",300000],["정찬호","02.23",300000]
+      ]
+    },
+    {
+      year:2025, partial:false, carry:414300, dues:2900000, avail:3314300, spent:2638100, end:676200,
+      endLabel:"연말 잔액",
+      rows:[
+        ["25.01","미식가",355000,2959300,null],
+        ["25.02","후원 식사 + 막리단길",92600,2866700,null],
+        ["25.03","신쭈꾸미 화정점",289500,2577200,null],
+        ["25.04","청춘을 돌려다오",222000,2355200,null],
+        ["25.05","금호메디 후원",0,2355200,"후원"],
+        ["25.06","오늘은 오리 먹는 날",273000,2082200,null],
+        ["25.07","고창만석꾼",260000,1822200,null],
+        ["25.07","차평석 부장님 상",49000,1773200,"경조"],
+        ["25.08","차평석 부장님 후원",0,1773200,"후원"],
+        ["25.09","뭉클돈 광주상무점",256500,1516700,null],
+        ["25.10","백운회센터",268000,1248700,null],
+        ["25.11","박순자 손수제비 녹두집",153500,1095200,null],
+        ["25.12","거문도 은갈치",419000,676200,null]
+      ],
+      members:[
+        ["배양수","12.16",200000],["조영준","11.20",300000],["장창수","12.31",300000],
+        ["구귀명","01.10",300000],["차평석","11.20",300000],["이정신","11.20",300000],
+        ["김호진","11.20",300000],["서일환","11.20",300000],["김경무","11.20",300000],
+        ["문덕청","11.20",300000]
+      ]
+    },
+    {
+      year:2024, partial:false, carry:243300, dues:1940000, avail:2183300, spent:1769000, end:414300,
+      endLabel:"연말 잔액",
+      rows:[
+        ["24.04","농성집 + 맥주집",346000,1837300,null],
+        ["24.05","모던갤러리",241000,1596300,null],
+        ["24.06","신똑순이 아구찜",166000,1430300,null],
+        ["24.07","효정식당",209000,1221300,null],
+        ["24.08","고창만석꾼",169000,1052300,null],
+        ["24.09","야구장 경기",182000,870300,null],
+        ["24.10","청솔",283000,587300,null],
+        ["24.11","나물꽃 필 무렵",173000,414300,null],
+        ["24.12","후원",0,414300,"후원"]
+      ],
+      members:null
+    }
+  ];
+
+  var ROW_MAX = 419000; // 거문도 은갈치 (25.12) — 단일 건 최대 지출
+
+  /* ----- tiles ----- */
+  var TILES = [
+    ["현재 잔액", W(2290900), "2026년 9월 기준"],
+    ["2026 회비", W(3300000), "11명 전원 ₩300,000 납부"],
+    ["2026 지출", W(1685300), "1~9월 10건"],
+    ["협찬·후원으로 0원", "6회", "2024년 이후 회비를 쓰지 않은 달"]
+  ];
+  document.getElementById("tiles").innerHTML = TILES.map(function(t){
+    return '<div class="tile"><dt>'+t[0]+'</dt><dd>'+t[1]+'<span class="sub">'+t[2]+'</span></dd></div>';
+  }).join("");
+
+  /* ----- year chart ----- */
+  var CMAX = 3300000;
+  document.getElementById("yearChart").innerHTML = YEARS.slice().reverse().map(function(y){
+    function bar(key,label,val,color){
+      var pct = (val / CMAX * 100).toFixed(2);
+      return '<div class="row" tabindex="0" role="img" aria-label="'+y.year+'년 '+label+' '+W(val)+'">'
+        + '<span class="row-key">'+key+'</span>'
+        + '<span class="track"><span class="fill" style="width:'+pct+'%;background:'+color+'"></span></span>'
+        + '<span class="row-val">'+W(val)+'</span></div>';
+    }
+    return '<div class="grp"><div class="grp-title">'+y.year+'년'
+      + (y.partial ? ' <em>1~9월</em>' : '')
+      + '</div>'
+      + bar("회비", "회비 수입", y.dues, "var(--income)")
+      + bar("지출", "지출", y.spent, "var(--expense)")
+      + '</div>';
+  }).join("");
+
+  /* ----- year blocks ----- */
+  document.getElementById("years").innerHTML = YEARS.map(function(y){
+    var rows = y.rows.map(function(r){
+      var amt = r[2];
+      var barW = amt > 0 ? (amt / ROW_MAX * 100).toFixed(1) : 0;
+      return '<tr>'
+        + '<td class="when">'+r[0]+'</td>'
+        + '<td class="what"><span class="what-name">'+r[1]
+          + (r[4] ? '<span class="chip">'+r[4]+'</span>' : '')
+          + '</span>'
+          + (amt > 0 ? '<span class="bar" style="width:'+barW+'%"></span>' : '')
+        + '</td>'
+        + '<td class="amt r'+(amt===0?' zero':'')+'">'+(amt===0 ? "—" : W(amt))+'</td>'
+        + '<td class="bal r">'+W(r[3])+'</td>'
+        + '</tr>';
+    }).join("");
+
+    var members = "";
+    if (y.members){
+      members = '<div class="sub-head">회비 납부 현황 · '+y.members.length+'명</div>'
+        + '<div class="members">'
+        + y.members.map(function(m){
+            return '<div class="member">'
+              + '<span class="who">'+m[0]+'<small>'+m[1]+'</small></span>'
+              + '<span class="paid">'+W(m[2])+'</span></div>';
+          }).join("")
+        + '<div class="member-foot"><span>'+y.members.length+'명 납부</span>'
+          + '<span>합계 <b>'+W(y.dues)+'</b></span></div>'
+        + '</div>';
+    }
+
+    return '<div class="year">'
+      + '<div class="year-head">'
+        + '<div class="year-num">'+y.year+'<small>'+(y.partial ? "1~9월" : "1~12월")+'</small></div>'
+        + '<dl class="flow">'
+          + (y.members
+              ? '<div class="flow-item"><dt>이월</dt><dd>'+W(y.carry)+'</dd></div>'
+                + '<span class="flow-op">+</span>'
+                + '<div class="flow-item"><dt>회비</dt><dd>'+W(y.dues)+'</dd></div>'
+                + '<span class="flow-op">−</span>'
+                + '<div class="flow-item"><dt>지출</dt><dd>'+W(y.spent)+'</dd></div>'
+                + '<span class="flow-op">=</span>'
+                + '<div class="flow-item"><dt>'+y.endLabel+'</dt><dd>'+W(y.end)+'</dd></div>'
+              : '<div class="flow-item"><dt>지출</dt><dd>'+W(y.spent)+'</dd></div>')
+        + '</dl>'
+      + '</div>'
+      + '<div class="sub-head">지출 내역 · '+y.rows.length+'건</div>'
+      + '<div class="table-wrap"><table>'
+        + '<thead><tr><th>시기</th><th>내역</th><th class="r">지출</th><th class="r">남은 돈</th></tr></thead>'
+        + '<tbody>'+rows+'</tbody>'
+        + '<tfoot><tr><td colspan="2" class="lbl">'+y.year+'년 지출 합계</td>'
+          + '<td class="amt r">'+W(y.spent)+'</td><td class="bal r">'+W(y.end)+'</td></tr></tfoot>'
+      + '</table></div>'
+      + members
+      + '</div>';
+  }).join("");
+})();
+</script>
+</body>
+</html>
